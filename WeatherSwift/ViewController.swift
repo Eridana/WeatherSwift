@@ -93,6 +93,10 @@ class ViewController: UIViewController {
         })
     }
     
+    @IBAction func reloadData(sender: UIButton) {
+        self.loadWeatherData(LocationManager.sharedInstance.currentLocation)
+    }
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
