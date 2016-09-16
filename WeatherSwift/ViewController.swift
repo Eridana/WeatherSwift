@@ -12,6 +12,7 @@ import CoreLocation
 class ViewController: UIViewController {
 
     @IBOutlet var degreeLabel : UILabel!
+    @IBOutlet var celsiusLabel : UILabel!
     @IBOutlet var cityLabel : UILabel!
     @IBOutlet var dateLabel : UILabel!
     @IBOutlet var timeLabel : UILabel!
@@ -65,6 +66,7 @@ class ViewController: UIViewController {
                     
                     let celsius = responseObject?.objectForKey("main")?.objectForKey("temp") as! Double
                     self.degreeLabel.text = String(format:"%.1f", celsius)
+                    self.celsiusLabel.text = "℃"
     
                     let city = responseObject?.objectForKey("name") as! String
                     self.cityLabel.text = city;

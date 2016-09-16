@@ -33,6 +33,12 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4M-fa-k7e">
+                                <rect key="frame" x="333" y="256" width="23" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pT-tD-MVp">
                                 <rect key="frame" x="296" y="118" width="8" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
@@ -42,12 +48,6 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="O88-QM-FjX">
                                 <rect key="frame" x="20" y="50" width="560" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="℃" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4M-fa-k7e">
-                                <rect key="frame" x="334" y="249" width="23" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -78,10 +78,10 @@
                             <constraint firstItem="has-xf-VdS" firstAttribute="top" secondItem="9pT-tD-MVp" secondAttribute="bottom" constant="6" id="2c4-oG-RTi"/>
                             <constraint firstItem="PCL-lR-HaL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4lv-PM-LEy"/>
                             <constraint firstItem="9pT-tD-MVp" firstAttribute="top" secondItem="O88-QM-FjX" secondAttribute="bottom" constant="8" id="6Ar-2Q-qlJ"/>
-                            <constraint firstItem="C4M-fa-k7e" firstAttribute="top" secondItem="Jac-0I-cf5" secondAttribute="top" constant="15" id="E60-CY-4HO"/>
+                            <constraint firstItem="C4M-fa-k7e" firstAttribute="leading" secondItem="Jac-0I-cf5" secondAttribute="trailing" id="Hrn-no-uI7"/>
                             <constraint firstItem="Jac-0I-cf5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QMb-wq-WyZ"/>
-                            <constraint firstItem="C4M-fa-k7e" firstAttribute="leading" secondItem="Jac-0I-cf5" secondAttribute="trailing" id="S4i-kW-DfE"/>
                             <constraint firstItem="PCL-lR-HaL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="T3K-py-i6z"/>
+                            <constraint firstItem="C4M-fa-k7e" firstAttribute="top" secondItem="Jac-0I-cf5" secondAttribute="top" constant="15" id="Tbv-jU-Tc2"/>
                             <constraint firstItem="6Jz-op-0ba" firstAttribute="centerX" secondItem="Jac-0I-cf5" secondAttribute="centerX" id="U0q-YD-4Ec"/>
                             <constraint firstItem="6Jz-op-0ba" firstAttribute="top" secondItem="Jac-0I-cf5" secondAttribute="bottom" constant="6" id="U4a-IF-znM"/>
                             <constraint firstAttribute="trailing" secondItem="O88-QM-FjX" secondAttribute="trailing" constant="20" id="WsG-is-JYf"/>
@@ -97,6 +97,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="blurImage" destination="tHb-fw-BX4" id="cXP-fc-jSR"/>
+                        <outlet property="celsiusLabel" destination="C4M-fa-k7e" id="m6T-QX-UTM"/>
                         <outlet property="cityLabel" destination="O88-QM-FjX" id="rbs-TR-v4p"/>
                         <outlet property="dateLabel" destination="9pT-tD-MVp" id="ERd-xK-xiD"/>
                         <outlet property="degreeLabel" destination="Jac-0I-cf5" id="tYX-tb-IwL"/>
