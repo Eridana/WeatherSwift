@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8150" systemVersion="15A204g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -13,15 +13,53 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weather" translatesAutoresizingMaskIntoConstraints="NO" id="9RQ-jC-fU2">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q57-kb-98I">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="byC-35-qHf">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WEATHER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khk-mK-jgS">
+                                            <rect key="frame" x="119" y="344" width="177" height="48"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="40"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="khk-mK-jgS" firstAttribute="centerX" secondItem="byC-35-qHf" secondAttribute="centerX" id="atG-bt-6Qc"/>
+                                        <constraint firstItem="khk-mK-jgS" firstAttribute="centerY" secondItem="byC-35-qHf" secondAttribute="centerY" id="j2Z-KE-UHF"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="extraLight"/>
+                            </visualEffectView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Q57-kb-98I" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="0i9-FW-ehB"/>
+                            <constraint firstAttribute="trailing" secondItem="9RQ-jC-fU2" secondAttribute="trailing" id="LoY-MH-jne"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Q57-kb-98I" secondAttribute="bottom" id="Olx-cl-sbo"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="9RQ-jC-fU2" secondAttribute="bottom" id="Ytg-pC-WFR"/>
+                            <constraint firstItem="Q57-kb-98I" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="bzs-wi-B5h"/>
+                            <constraint firstItem="9RQ-jC-fU2" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="c7Z-MW-05C"/>
+                            <constraint firstAttribute="trailing" secondItem="Q57-kb-98I" secondAttribute="trailing" id="eOR-Wz-ozu"/>
+                            <constraint firstItem="9RQ-jC-fU2" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="eg5-rE-8UU"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="weather" width="1296" height="864"/>
+    </resources>
 </document>
