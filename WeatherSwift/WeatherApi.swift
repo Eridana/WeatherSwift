@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 typealias ApiResponse = (NSDictionary?, NSError?) -> Void
 
@@ -19,9 +20,17 @@ class WeatherApi: NSObject {
         return Singleton.instance
     }
     
-    func getWeatherDictionaryFromUrl(completion: ApiResponse) -> Void
+    func getWeatherDictionaryByLocation(location : CLLocation?, completion: (ApiResponse)) -> Void
     {
-        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: "http://api.openweathermap.org/data/2.5/weather?q=ufa&units=metric&APPID=6e31ea25c4777f9418f524e9840ca640")!, completionHandler: { (data, response, error) -> Void in
+        var url = "http://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&APPID=6e31ea25c4777f9418f524e9840ca640"
+        
+        if (location != nil) {
+            url = url + String(format: "&lat=%.2f&lon=%.2f", (location?.coordinate.latitude)!, (location?.coordinate.longitude)!)
+        } else {
+            url = url + "&q=ufa"
+        }
+        
+        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: url)!, completionHandler: { (data, response, error) -> Void in
             // Check if data was received successfully
             if error == nil && data != nil {
                 do {
