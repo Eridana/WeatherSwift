@@ -101,7 +101,8 @@ class ViewController: UIViewController {
         
         let weatherArray = responseObject?.objectForKey("weather") as! NSArray
         let weatherData = weatherArray.objectAtIndex(0) as! NSDictionary
-        let descr = weatherData.objectForKey("description") as! String
+        var descr = weatherData.objectForKey("description") as! String
+        descr.replaceRange(descr.startIndex...descr.startIndex, with: String(descr[descr.startIndex]).capitalizedString)
         self.detailsLabel.text = descr
         
         let windSpeed = responseObject?.objectForKey("wind")?.objectForKey("speed") as! Double
