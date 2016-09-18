@@ -72,6 +72,12 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LO-3x-TvU">
+                                <rect key="frame" x="20" y="568" width="560" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74o-AX-jm2">
                                 <rect key="frame" x="545" y="30" width="40" height="40"/>
                                 <constraints>
@@ -93,6 +99,7 @@
                             <constraint firstItem="has-xf-VdS" firstAttribute="top" secondItem="9pT-tD-MVp" secondAttribute="bottom" constant="6" id="2c4-oG-RTi"/>
                             <constraint firstItem="PCL-lR-HaL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4lv-PM-LEy"/>
                             <constraint firstItem="9pT-tD-MVp" firstAttribute="top" secondItem="O88-QM-FjX" secondAttribute="bottom" constant="8" id="6Ar-2Q-qlJ"/>
+                            <constraint firstItem="8LO-3x-TvU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Auf-2u-n0U"/>
                             <constraint firstItem="C4M-fa-k7e" firstAttribute="leading" secondItem="Jac-0I-cf5" secondAttribute="trailing" id="Hrn-no-uI7"/>
                             <constraint firstAttribute="trailing" secondItem="74o-AX-jm2" secondAttribute="trailing" constant="15" id="O1S-Q8-RUi"/>
                             <constraint firstItem="Jac-0I-cf5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QMb-wq-WyZ"/>
@@ -103,9 +110,11 @@
                             <constraint firstAttribute="trailing" secondItem="O88-QM-FjX" secondAttribute="trailing" constant="20" id="WsG-is-JYf"/>
                             <constraint firstItem="has-xf-VdS" firstAttribute="centerX" secondItem="9pT-tD-MVp" secondAttribute="centerX" id="Xbh-a9-gz9"/>
                             <constraint firstItem="Jac-0I-cf5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="XkK-DS-2gs"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8LO-3x-TvU" secondAttribute="bottom" constant="15" id="bg5-PO-2eC"/>
                             <constraint firstItem="4q5-i6-UBx" firstAttribute="top" secondItem="6Jz-op-0ba" secondAttribute="bottom" constant="6" id="hj4-4e-Z42"/>
                             <constraint firstItem="O88-QM-FjX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nQP-HT-Ic7"/>
                             <constraint firstItem="9pT-tD-MVp" firstAttribute="centerX" secondItem="O88-QM-FjX" secondAttribute="centerX" id="pnO-X9-lT7"/>
+                            <constraint firstItem="8LO-3x-TvU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="u9J-M5-SRx"/>
                             <constraint firstAttribute="trailing" secondItem="PCL-lR-HaL" secondAttribute="trailing" id="ykg-0Q-4Pi"/>
                         </constraints>
                     </view>
@@ -117,6 +126,7 @@
                         <outlet property="dateLabel" destination="9pT-tD-MVp" id="ERd-xK-xiD"/>
                         <outlet property="degreeLabel" destination="Jac-0I-cf5" id="tYX-tb-IwL"/>
                         <outlet property="detailsLabel" destination="6Jz-op-0ba" id="XBe-ql-dsk"/>
+                        <outlet property="lastUpdatedTime" destination="8LO-3x-TvU" id="npt-rp-pFl"/>
                         <outlet property="timeLabel" destination="has-xf-VdS" id="bCs-JH-sLt"/>
                         <outlet property="windLabel" destination="4q5-i6-UBx" id="Pzb-w8-Yxb"/>
                     </connections>

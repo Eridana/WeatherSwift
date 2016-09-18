@@ -11,22 +11,28 @@ import CoreLocation
 
 class ViewController: UIViewController {
 
-    @IBOutlet var degreeLabel : UILabel!
-    @IBOutlet var celsiusLabel : UILabel!
-    @IBOutlet var cityLabel : UILabel!
-    @IBOutlet var dateLabel : UILabel!
-    @IBOutlet var timeLabel : UILabel!
-    @IBOutlet var detailsLabel : UILabel!
-    @IBOutlet var windLabel : UILabel!
-    @IBOutlet var blurImage : UIImageView!
+    @IBOutlet weak var degreeLabel : UILabel!
+    @IBOutlet weak var celsiusLabel : UILabel!
+    @IBOutlet weak var cityLabel : UILabel!
+    @IBOutlet weak var dateLabel : UILabel!
+    @IBOutlet weak var timeLabel : UILabel!
+    @IBOutlet weak var detailsLabel : UILabel!
+    @IBOutlet weak var windLabel : UILabel!
+    @IBOutlet weak var lastUpdatedTime: UILabel!
+    @IBOutlet weak var blurImage : UIImageView!
     var timer : NSTimer!
     var formatter : NSDateFormatter!
+    var lastUpdatedFormatter : NSDateFormatter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         formatter = NSDateFormatter()
+        lastUpdatedFormatter = NSDateFormatter()
+        lastUpdatedFormatter.dateFormat = "Последнее обновление:\nEEEE dd MMMM, HH:mm:ss"
+        
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: #selector(updateCurrentDate), userInfo: nil, repeats: true)
+         self.updateDisplayData(DataManager.sharedInstance.loadWeatherData())
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
@@ -53,8 +59,7 @@ class ViewController: UIViewController {
     }
     
     func updateCurrentDate() -> Void {
-        
-        let formatter = NSDateFormatter()
+
         formatter.dateFormat = "EEEE dd MMMM"
         self.dateLabel.text = formatter.stringFromDate(NSDate())
         
@@ -78,36 +83,42 @@ class ViewController: UIViewController {
         WeatherApi.sharedInstance.getWeatherDictionaryByLocation(location, completion: { (responseObject:NSDictionary?, error:NSError?) in
             if error != nil {
                 NSLog("error \(error)")
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.updateDisplayData(DataManager.sharedInstance.loadWeatherData())
+                }
             } else {
                 NSLog("response data: \(responseObject)")
                 
-                dispatch_async(dispatch_get_main_queue()) {
-                    
-                    self.showReceivedWeatherDataFromResponse(responseObject)
-                }
+                DataManager.sharedInstance.saveData(responseObject, completion: { (savedWeatherObject: WeatherData?, error:NSError? ) in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.updateDisplayData(savedWeatherObject)
+                    }
+                })
             }
         })
     }
     
-    func showReceivedWeatherDataFromResponse(responseObject: NSDictionary?) -> Void {
-        
-        let celsius = responseObject?.objectForKey("main")?.objectForKey("temp") as! Double
-        self.degreeLabel.text = String(format:"%.1f", celsius)
-        self.celsiusLabel.text = "℃"
-        
-        let city = responseObject?.objectForKey("name") as! String
-        self.cityLabel.text = city;
-        self.cityLabel.sizeToFit()
-        
-        let weatherArray = responseObject?.objectForKey("weather") as! NSArray
-        let weatherData = weatherArray.objectAtIndex(0) as! NSDictionary
-        var descr = weatherData.objectForKey("description") as! String
-        descr.replaceRange(descr.startIndex...descr.startIndex, with: String(descr[descr.startIndex]).capitalizedString)
-        self.detailsLabel.text = descr
-        
-        let windSpeed = responseObject?.objectForKey("wind")?.objectForKey("speed") as! Double
-        let windStr = String(format:"%.1f", windSpeed)
-        self.windLabel.text = "Скорость ветра \(windStr) м/с"
+    func updateDisplayData(weather:WeatherData?) -> Void {
+        if (weather != nil) {
+            if (weather!.degree != nil) {
+                self.celsiusLabel.text = "℃"
+                self.degreeLabel.text = String(format:"%.1f", weather!.degree!)
+            }
+            if (weather!.city != nil) {
+                self.cityLabel.text = weather!.city!;
+                self.cityLabel.sizeToFit()
+            }
+            if (weather!.shortDescription != nil) {
+                self.detailsLabel.text = weather!.shortDescription!
+            }
+            if (weather!.windSpeed != nil) {
+                let windStr = String(format:"%.1f", weather!.windSpeed!)
+                self.windLabel.text = "Скорость ветра \(windStr) м/с"
+            }
+            if (weather!.time != nil) {                
+                self.lastUpdatedTime.text = lastUpdatedFormatter.stringFromDate(weather!.time!)
+            }
+        }
     }
     
     @IBAction func reloadData(sender: UIButton) {
