@@ -36,10 +36,9 @@ class DataManager : NSObject {
             let weatherArray = response?.objectForKey("weather") as! NSArray
             let weatherData = weatherArray.objectAtIndex(0) as! NSDictionary
             
-            var descr = weatherData.objectForKey("description") as? String
+            let descr = weatherData.objectForKey("description") as? String
             if (descr != nil) {
-                descr!.replaceRange(descr!.startIndex...descr!.startIndex, with: String(descr![descr!.startIndex]).capitalizedString)
-                weatherObject!.shortDescription = descr!
+                weatherObject!.shortDescription = descr!.firstLetterCapitalizedString()
             }
             
             weatherObject?.time = NSDate()

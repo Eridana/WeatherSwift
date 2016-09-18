@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         
         formatter = NSDateFormatter()
         lastUpdatedFormatter = NSDateFormatter()
-        lastUpdatedFormatter.dateFormat = "Последнее обновление:\nEEEE dd MMMM, HH:mm:ss"
+        lastUpdatedFormatter.dateFormat = "EEEE dd MMMM, HH:mm:ss"
         
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: #selector(updateCurrentDate), userInfo: nil, repeats: true)
          self.updateDisplayData(DataManager.sharedInstance.loadWeatherData())
@@ -61,7 +61,7 @@ class ViewController: UIViewController {
     func updateCurrentDate() -> Void {
 
         formatter.dateFormat = "EEEE dd MMMM"
-        self.dateLabel.text = formatter.stringFromDate(NSDate())
+        self.dateLabel.text = formatter.stringFromDate(NSDate()).firstLetterCapitalizedString()
         
         formatter.dateFormat = "HH:mm:ss"
         self.timeLabel.text = formatter.stringFromDate(NSDate())
@@ -88,7 +88,6 @@ class ViewController: UIViewController {
                 }
             } else {
                 NSLog("response data: \(responseObject)")
-                
                 DataManager.sharedInstance.saveData(responseObject, completion: { (savedWeatherObject: WeatherData?, error:NSError? ) in
                     dispatch_async(dispatch_get_main_queue()) {
                         self.updateDisplayData(savedWeatherObject)
@@ -115,8 +114,9 @@ class ViewController: UIViewController {
                 let windStr = String(format:"%.1f", weather!.windSpeed!)
                 self.windLabel.text = "Скорость ветра \(windStr) м/с"
             }
-            if (weather!.time != nil) {                
-                self.lastUpdatedTime.text = lastUpdatedFormatter.stringFromDate(weather!.time!)
+            if (weather!.time != nil) {
+                let timeString = lastUpdatedFormatter.stringFromDate(weather!.time!)
+                self.lastUpdatedTime.text = String(format: "Последнее обновление:\n%@", timeString)
             }
         }
     }
