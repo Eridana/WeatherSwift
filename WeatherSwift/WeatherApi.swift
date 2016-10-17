@@ -20,7 +20,7 @@ class WeatherApi: NSObject {
         return Singleton.instance
     }
     
-    func getWeatherDictionaryByLocation(location : CLLocation?, completion: (ApiResponse)) -> Void
+    func getWeatherDictionaryByLocation(_ location : CLLocation?, completion: @escaping (ApiResponse)) -> Void
     {
         var url = "http://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&APPID=6e31ea25c4777f9418f524e9840ca640"
         
@@ -30,13 +30,13 @@ class WeatherApi: NSObject {
             url = url + "&q=ufa"
         }
         
-        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: url)!, completionHandler: { (data, response, error) -> Void in
+        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { (data, response, error) -> Void in
             // Check if data was received successfully
             if error == nil && data != nil {
                 do {
                     // Convert NSData to Dictionary where keys are of type String, and values are of any type
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! [String:AnyObject]
-                    completion(json, nil)
+                    let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String:AnyObject]
+                    completion(json as NSDictionary?, nil)
                     
                 } catch {
                     // Something went wrong

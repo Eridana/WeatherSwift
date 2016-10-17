@@ -27,19 +27,18 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if (currentLocation != nil) {
-            if (newLocation != currentLocation) {
-                currentLocation = newLocation
+            if (locations.last != currentLocation) {
+                currentLocation = locations.last
                 self.sendNotification()
             }
         } else {
-            currentLocation = newLocation
+            currentLocation = locations.last
             self.sendNotification()
         }
     }
@@ -47,14 +46,14 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func sendNotification() -> Void {
         if (currentLocation != nil) {
             let info : [String:AnyObject] = [ "location" : currentLocation! ]
-            NSNotificationCenter.defaultCenter().postNotificationName("DidUpdateLocation", object: info);
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "DidUpdateLocation"), object: info);
         }
     }
     
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
-        case .Denied:
-            NSNotificationCenter.defaultCenter().postNotificationName("LocationPermissionError", object: nil);
+        case .denied:
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "LocationPermissionError"), object: nil);
             break
         default:
             locationManager.startUpdatingLocation()

@@ -14,38 +14,38 @@ class WeatherData: NSObject, NSCoding {
     var shortDescription: String?
     var city : String?
     var windSpeed : Double?
-    var time : NSDate?
+    var time : Date?
     
     override init() {}
     
     required init(coder aDecoder: NSCoder) {
-        self.degree = aDecoder.decodeObjectForKey("degree") as? Double
-        self.shortDescription = aDecoder.decodeObjectForKey("shortDescription") as? String
-        self.city = aDecoder.decodeObjectForKey("city") as? String
-        self.windSpeed = aDecoder.decodeObjectForKey("windSpeed") as? Double
-        self.time = aDecoder.decodeObjectForKey("time") as? NSDate
+        self.degree = aDecoder.decodeObject(forKey: "degree") as? Double
+        self.shortDescription = aDecoder.decodeObject(forKey: "shortDescription") as? String
+        self.city = aDecoder.decodeObject(forKey: "city") as? String
+        self.windSpeed = aDecoder.decodeObject(forKey: "windSpeed") as? Double
+        self.time = aDecoder.decodeObject(forKey: "time") as? Date
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.degree, forKey: "degree")
-        aCoder.encodeObject(self.shortDescription, forKey: "shortDescription")
-        aCoder.encodeObject(self.city, forKey: "city")
-        aCoder.encodeObject(self.windSpeed, forKey: "windSpeed")
-        aCoder.encodeObject(self.time, forKey: "time")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.degree, forKey: "degree")
+        aCoder.encode(self.shortDescription, forKey: "shortDescription")
+        aCoder.encode(self.city, forKey: "city")
+        aCoder.encode(self.windSpeed, forKey: "windSpeed")
+        aCoder.encode(self.time, forKey: "time")
     }
     
     func save() {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(self)
-        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "WeatherData")
+        let data = NSKeyedArchiver.archivedData(withRootObject: self)
+        UserDefaults.standard.set(data, forKey: "WeatherData")
     }
     
     func clear() {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("WeatherData")
+        UserDefaults.standard.removeObject(forKey: "WeatherData")
     }
     
     class func loadSaved() -> WeatherData? {
-        if let data = NSUserDefaults.standardUserDefaults().objectForKey("WeatherData") as? NSData {
-            return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? WeatherData
+        if let data = UserDefaults.standard.object(forKey: "WeatherData") as? Data {
+            return NSKeyedUnarchiver.unarchiveObject(with: data) as? WeatherData
         }
         return nil
     }

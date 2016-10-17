@@ -12,7 +12,7 @@ extension String {
     
     func firstLetterCapitalizedString() -> String {
         var initialString = self
-        initialString.replaceRange(initialString.startIndex...initialString.startIndex, with: String(initialString[initialString.startIndex]).capitalizedString)
+        initialString.replaceSubrange(initialString.startIndex...initialString.startIndex, with: String(initialString[initialString.startIndex]).capitalized)
         return initialString
     }
 }

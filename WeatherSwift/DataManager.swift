@@ -19,7 +19,7 @@ class DataManager : NSObject {
         return Singleton.instance
     }
     
-    func saveData(response : NSDictionary?, completion: (SaveDataResponse)) -> Void {
+    func saveData(_ response : NSDictionary?, completion: (SaveDataResponse)) -> Void {
         
         var weatherObject = self.loadWeatherData()
         
@@ -29,19 +29,19 @@ class DataManager : NSObject {
         
         if (response != nil) {
             
-            weatherObject!.degree = response?.objectForKey("main")?.objectForKey("temp") as? Double
-            weatherObject!.city = response?.objectForKey("name") as? String
-            weatherObject!.windSpeed = response?.objectForKey("wind")?.objectForKey("speed") as? Double
+            weatherObject!.degree = (response?.object(forKey: "main") as! NSDictionary).object(forKey: "temp") as? Double
+            weatherObject!.city = response?.object(forKey: "name") as? String
+            weatherObject!.windSpeed = (response?.object(forKey: "wind") as! NSDictionary).object(forKey: "speed") as? Double
             
-            let weatherArray = response?.objectForKey("weather") as! NSArray
-            let weatherData = weatherArray.objectAtIndex(0) as! NSDictionary
+            let weatherArray = response?.object(forKey: "weather") as! NSArray
+            let weatherData = weatherArray.object(at: 0) as! NSDictionary
             
-            let descr = weatherData.objectForKey("description") as? String
+            let descr = weatherData.object(forKey: "description") as? String
             if (descr != nil) {
                 weatherObject!.shortDescription = descr!.firstLetterCapitalizedString()
             }
             
-            weatherObject?.time = NSDate()
+            weatherObject?.time = Date()
         }
         
         weatherObject!.save()
