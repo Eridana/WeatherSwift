@@ -2,7 +2,7 @@
 //  DataManager.swift
 //  WeatherSwift
 //
-//  Created by Женя Михайлова on 18.09.16.
+//  Created by Evgeniya Mikhailova on 18.09.16.
 //  Copyright © 2016 Evgeniya Mikhailova. All rights reserved.
 //
 
@@ -21,31 +21,27 @@ class DataManager : NSObject {
     
     func saveData(_ response : NSDictionary?, completion: (SaveDataResponse)) -> Void {
         
-        var weatherObject = self.loadWeatherData()
+        let weatherObject = self.loadWeatherData() ?? WeatherData()
         
-        if (weatherObject == nil) {
-            weatherObject = WeatherData()
-        }
-        
-        if (response != nil) {
-            
-            weatherObject!.degree = (response?.object(forKey: "main") as! NSDictionary).object(forKey: "temp") as? Double
-            weatherObject!.city = response?.object(forKey: "name") as? String
-            weatherObject!.windSpeed = (response?.object(forKey: "wind") as! NSDictionary).object(forKey: "speed") as? Double
-            
-            let weatherArray = response?.object(forKey: "weather") as! NSArray
-            let weatherData = weatherArray.object(at: 0) as! NSDictionary
-            
-            let descr = weatherData.object(forKey: "description") as? String
-            if (descr != nil) {
-                weatherObject!.shortDescription = descr!.firstLetterCapitalizedString()
+        if let response = response {
+            if let mainDict = response.object(forKey: "main") as? NSDictionary {
+                weatherObject.degree = mainDict.object(forKey: "temp") as? Double
             }
-            
-            weatherObject?.time = Date()
+            if let windDict = response.object(forKey: "wind") as? NSDictionary {
+                weatherObject.windSpeed = windDict.object(forKey: "speed") as? Double
+            }
+            weatherObject.city = response.object(forKey: "name") as? String
+            let weatherArray = response.object(forKey: "weather") as? NSArray
+            if let weatherData = weatherArray?.object(at: 0) as? NSDictionary {
+                if let description = weatherData.object(forKey: "description") as? String {
+                    weatherObject.shortDescription = description.firstLetterCapitalizedString()
+                }
+            }            
+            weatherObject.time = Date()
         }
         
-        weatherObject!.save()
-        completion(weatherObject!, nil)
+        weatherObject.save()
+        completion(weatherObject, nil)
     }
     
     func loadWeatherData() -> WeatherData?  {
