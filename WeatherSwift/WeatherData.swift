@@ -2,7 +2,7 @@
 //  WeatherData.swift
 //  WeatherSwift
 //
-//  Created by Женя Михайлова on 18.09.16.
+//  Created by Evgeniya Mikhailova on 18.09.16.
 //  Copyright © 2016 Evgeniya Mikhailova. All rights reserved.
 //
 

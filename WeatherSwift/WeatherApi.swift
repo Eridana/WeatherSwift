@@ -2,7 +2,7 @@
 //  WeatherApi.swift
 //  WeatherSwift
 //
-//  Created by Женя Михайлова on 15.09.16.
+//  Created by Evgeniya Mikhailova on 15.09.16.
 //  Copyright © 2016 Evgeniya Mikhailova. All rights reserved.
 //
 
@@ -22,12 +22,13 @@ class WeatherApi: NSObject {
     
     func getWeatherDictionaryByLocation(_ location : CLLocation?, completion: @escaping (ApiResponse)) -> Void
     {
-        var url = "http://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&APPID=6e31ea25c4777f9418f524e9840ca640"
+        let lang = "lang".localized
+        var url = "http://api.openweathermap.org/data/2.5/weather?units=metric&lang=\(lang)&APPID=6e31ea25c4777f9418f524e9840ca640"
         
-        if (location != nil) {
-            url = url + String(format: "&lat=%.2f&lon=%.2f", (location?.coordinate.latitude)!, (location?.coordinate.longitude)!)
+        if let lat = location?.coordinate.latitude, let lon = location?.coordinate.longitude {
+            url = url + String(format: "&lat=%.2f&lon=%.2f", lat, lon)
         } else {
-            url = url + "&q=ufa"
+            url = url + "&q=lindau"
         }
         
         URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { (data, response, error) -> Void in

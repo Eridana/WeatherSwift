@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  WeatherSwift
 //
-//  Created by Женя Михайлова on 13.09.16.
+//  Created by Evgeniya Mikhailova on 13.09.16.
 //  Copyright © 2016 Evgeniya Mikhailova. All rights reserved.
 //
 

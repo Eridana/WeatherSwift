@@ -2,7 +2,7 @@
 //  LocationManager.swift
 //  WeatherSwift
 //
-//  Created by Женя Михайлова on 16.09.16.
+//  Created by Evgeniya Mikhailova on 16.09.16.
 //  Copyright © 2016 Evgeniya Mikhailova. All rights reserved.
 //
 
@@ -32,7 +32,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if (currentLocation != nil) {
+        if currentLocation != nil {
             if (locations.last != currentLocation) {
                 currentLocation = locations.last
                 self.sendNotification()
@@ -44,7 +44,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func sendNotification() -> Void {
-        if (currentLocation != nil) {
+        if currentLocation != nil {
             let info : [String:AnyObject] = [ "location" : currentLocation! ]
             NotificationCenter.default.post(name: Notification.Name(rawValue: "DidUpdateLocation"), object: info);
         }

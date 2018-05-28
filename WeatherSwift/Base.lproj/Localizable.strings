@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  WeatherSwift
+
+  Created by Evgeniia Mikhailova on 28.05.18.
+  Copyright © 2018 Evgeniya Mikhailova. All rights reserved.
+*/
+
+"lang" = "en";
+"screens.main.wind.speed.text" = "Wind speed is";
+"screens.main.last.update.text" = "Last update";
